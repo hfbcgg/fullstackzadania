@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant przeglądarka
+    participant serwer
+
+    Note right of przeglądarka: Użytkownik wpisuje treść i klika guzik Zapisz
+    przeglądarka->>serwer: strona postuje /new_note
+    Note left of serwer: Serwer procesuje zapytanie i udostępnia je do pliku
+    serwer-->>przeglądarka: przeniesienie odpowiedzi kodu 302 do /notes
+    przeglądarka->>serwer: przeglądarka getuje /notes
+    serwer-->>przeglądarka: przeglądarka przesyła na serwer dokument html
+    przeglądarka->>serwer: przeglądarka getuje css
+    serwer-->>przeglądarka: przeglądarka przesyła na serwer plik css
+    przeglądarka->>serwer: przeglądarka getuje js
+    serwer-->>przeglądarka: przeglądarka przesyła na serwer plik JS
+    Note right of przeglądarka: JS pobiera zaktualizowany plik notatek
+    przeglądarka->>serwer: przeglądarka getuje json
+    serwer-->>przeglądarka: JSON ma nową notatkę i ją wyświetla
