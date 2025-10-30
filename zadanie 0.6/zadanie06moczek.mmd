@@ -2,15 +2,8 @@ sequenceDiagram
 participant przeglądarka
 participant serwer
 przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/spa
-    serwer->>przeglądarka:przegladarka otrzymuje html z serwera
-przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/spa.js
-    serwer->>przeglądarka:przegladarka otrzymuje js z serwera
-przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    serwer->>przeglądarka:przegladarka otrzymuje css z serwera
-    note left of serwer:js pobiera dane notatek z serwera, 
-    note left of serwer:przegladarka tworzy nowy kod html za pomoca dom-api dla poprawnego wyswietlania notatek bez przeladowania strony
-    przeglądarka->>serwer:przegladarka przesyla dane do serwera przez formularz żądaniem POST uzytego przez JS
-    przeglądarka-->>serwer:nowa notatka jest tymczasowo przechowywana w lokalnej tablicy ktora dopiero pozniej jest przesylana do serwera - aby zapobiec reloadowi strony
-    serwer->>przeglądarka:kod 201 utworzono
-    przeglądarka->>serwer:notatka jest wysylana z serwera do przegladarki przez funkcję notes.push(note)
-    Note right of przeglądarka:strona NIE jest przeladowywana ponownie
+    serwer->>przeglądarka:przegladarka otrzymuje plik single page app z serwera
+    przeglądarka ->> serwer: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note left of serwer: Serwer odbiera żądanie POST z danymi notatki w formacie JSON, parsuje dane i dodaje notatkę do swojej pamięci (np. listy notatek).
+    serwer -->> przeglądarka: Odpowiedź (201) Created
+    Note right of przeglądarka: Przeglądarka aktualizuje widok listy za pomocą skryptu JavaScript strona nie jest przeładowywana
