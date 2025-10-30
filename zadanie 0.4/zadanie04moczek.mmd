@@ -13,5 +13,6 @@ sequenceDiagram
     przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     serwer-->>przeglądarka: przeglądarka otrzymuje plik JS
     Note right of przeglądarka: JS pobiera zaktualizowany plik https://studies.cs.helsinki.fi/exampleapp/notes
+    serwer-->>przeglądarka:przeglądarka otrzymuje nowy plik notes.html
     przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     serwer-->>przeglądarka: JSON ma nową notatkę i ją wyświetla
