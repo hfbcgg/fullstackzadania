@@ -3,15 +3,15 @@ sequenceDiagram
     participant serwer
 
     Note right of przeglądarka: Użytkownik wpisuje treść i klika guzik Zapisz
-    przeglądarka->>serwer: strona postuje /new_note
+    przeglądarka->>serwer: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     Note left of serwer: Serwer procesuje zapytanie i udostępnia je do pliku
-    serwer-->>przeglądarka: przeniesienie odpowiedzi kodu 302 do /notes
-    przeglądarka->>serwer: przeglądarka getuje /notes
-    serwer-->>przeglądarka: przeglądarka przesyła na serwer dokument html
-    przeglądarka->>serwer: przeglądarka getuje css
-    serwer-->>przeglądarka: przeglądarka przesyła na serwer plik css
-    przeglądarka->>serwer: przeglądarka getuje js
-    serwer-->>przeglądarka: przeglądarka przesyła na serwer plik JS
-    Note right of przeglądarka: JS pobiera zaktualizowany plik notatek
-    przeglądarka->>serwer: przeglądarka getuje json
+    serwer-->>przeglądarka: Odpowiedź 302 do adresu https://studies.cs.helsinki.fi/exampleapp/notes
+    przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    serwer-->>przeglądarka: przeglądarka otrzymuje plik notes.html
+    przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    serwer-->>przeglądarka: przeglądarka otrzymuje plik css
+    przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    serwer-->>przeglądarka: przeglądarka otrzymuje plik JS
+    Note right of przeglądarka: JS pobiera zaktualizowany plik https://studies.cs.helsinki.fi/exampleapp/notes
+    przeglądarka->>serwer: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     serwer-->>przeglądarka: JSON ma nową notatkę i ją wyświetla
