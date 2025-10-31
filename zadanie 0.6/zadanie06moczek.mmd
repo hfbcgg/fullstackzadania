@@ -1,9 +1,0 @@
-sequenceDiagram
-participant przeglądarka
-participant serwer
-przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/spa
-    serwer->>przeglądarka:przegladarka otrzymuje plik single page app z serwera
-    przeglądarka ->> serwer: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-    Note left of serwer: Serwer odbiera żądanie POST z danymi notatki w formacie JSON, parsuje dane i dodaje notatkę do swojej pamięci (np. listy notatek).
-    serwer -->> przeglądarka: Odpowiedź (201) Created
-    Note right of przeglądarka: Przeglądarka aktualizuje widok listy za pomocą skryptu JavaScript strona nie jest przeładowywana
