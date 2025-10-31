@@ -1,0 +1,7 @@
+sequenceDiagram
+participant przeglądarka
+participant serwer
+    przeglądarka-->>serwer:przegladarka getuje spa
+    serwer->>przeglądarka:przegladarka pobiera html i js z serwera
+    note left of serwer:js pobiera dane notatek z serwera, 
+    note left of serwer:przegladarka tworzy nowy kod html za pomoca dom-api dla poprawnego wyswietlania notatek bez przeladowania strony
