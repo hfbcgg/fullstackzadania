@@ -1,7 +1,13 @@
 sequenceDiagram
 participant przeglądarka
 participant serwer
-    przeglądarka-->>serwer:przegladarka getuje spa
-    serwer->>przeglądarka:przegladarka pobiera html i js z serwera
+    przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/spa
+    serwer->>przeglądarka:przegladarka otrzymuje html Z serwera
+    przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    serwer->>przeglądarka:przegladarka otrzymuje plik css Z serwera
+    przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    serwer->>przeglądarka:przegladarka otrzymuje plik js Z serwera
+    przeglądarka-->>serwer:GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    serwer->>przeglądarka:przegladarka otrzymuje plik json Z serwera
     note left of serwer:js pobiera dane notatek z serwera, 
     note left of serwer:przegladarka tworzy nowy kod html za pomoca dom-api dla poprawnego wyswietlania notatek bez przeladowania strony
