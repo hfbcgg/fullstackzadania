@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-
-
 const ButtonNastepna = ({Zmiana}) => {return(
   <button onClick={Zmiana}>next anecdote</button>
 )}
@@ -11,9 +9,6 @@ This anecdote has {votes[selected]} votes
   <button onClick={Vote}>Vote</button>
   </div>
 )}
-
-
-
 
 const App = () => {
   const anecdotes = [
@@ -27,7 +22,6 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
   const [votes, setVotes] = useState({0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0})
-
 const Vote = () => {
     const copy = {...votes}
     copy[selected] += 1
@@ -38,13 +32,9 @@ const Zmiana = () =>{
 let RandomLiczba =Math.floor(Math.random() * 8)
 setSelected(RandomLiczba)
 console.log(RandomLiczba)
-
 }
 const maxVal =Math.max(...Object.values(votes))
 const maxInd = Object.keys(votes).find(key => votes[key] === maxVal)
-
-
-
   return (
     <div>
       <h1>Anecdote of the day</h1>
@@ -55,8 +45,9 @@ const maxInd = Object.keys(votes).find(key => votes[key] === maxVal)
       <h1>Anecdote with most votes</h1>
       {anecdotes[maxInd]}
       <br/>has {maxVal} votes
+      <br/>
+      <button onClick={() => console.log(2+2)}>jksdgfjgasdud</button>
     </div>
   )
 }
-
 export default App
