@@ -1,73 +1,60 @@
 import { useState } from 'react'
 
-const   Statisticline =(props) => {
-  return(<tr><td>{props.text}</td><td>{props.value}</td></tr>)
-}
-const Statistics =(props) => {
-   if(props.good+props.bad+props.neutral==0){
-    return(<p>no feedback given</p>)
-   }
-   else{
-     
-  return(<div>
-    <table><tbody>
-    <Statisticline text="good" value={props.good}/>
-    <Statisticline text="neutral" value={props.neutral}/>
-    <Statisticline text="bad" value={props.bad}/>
-    <Statisticline text="all" value={props.good+props.neutral+props.bad} />
-    <Avg good={props.good} bad={props.bad} neutral={props.neutral}/>
-    <Pos good={props.good} bad={props.bad} neutral={props.neutral}/>
-    </tbody></table></div>
-  )
-   }
-  
-}
-const Buttons = (props) =>{
-  return(<div>
-    <button onClick={() => props.setGood(props.good + 1)}>
-      good
-    </button>
-    <button onClick={() => props.setNeutral(props.neutral + 1)}>
-      neutral
-    </button>
-    <button onClick={() => props.setBad(props.bad + 1)}>
-      bad
-    </button>
-    </div>
-  )
-}
-const Avg = (props) =>{
-  return(
-    <tr><td>average</td><td> {(props.good+(props.bad*-1))/(props.good+props.neutral+props.bad)}</td>
-       </tr>
-      
-  )
-}
-const Pos = (props) =>{
-  return(
-<tr><td>positive </td><td>{(props.good*100)/(props.good+props.neutral+props.bad)}%</td>
-      
-    </tr>
-  )
-}
 
 
+const ButtonNastepna = ({Zmiana}) => {return(
+  <button onClick={Zmiana}>next anecdote</button>
+)}
+const ButtonVote = ({votes, selected, Vote}) => {return(
+  <div>
+This anecdote has {votes[selected]} votes
+  <button onClick={Vote}>Vote</button>
+  </div>
+)}
 
 
 
 
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
+  ]
+  const [votes, setVotes] = useState({0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0})
+
+const Vote = () => {
+    const copy = {...votes}
+    copy[selected] += 1
+    setVotes(copy)
+  }
+  const [selected, setSelected] = useState(0)
+const Zmiana = () =>{
+let RandomLiczba =Math.floor(Math.random() * 8)
+setSelected(RandomLiczba)
+console.log(RandomLiczba)
+
+}
+const maxVal =Math.max(...Object.values(votes))
+const maxInd = Object.keys(votes).find(key => votes[key] === maxVal)
+
+
 
   return (
     <div>
-      <h1>give feedback</h1>
-      <Buttons good={good} setGood={setGood} bad={bad} setBad={setBad} neutral={neutral} setNeutral= {setNeutral}/>
-      <h2>statistics</h2>
-      <Statistics good={good} bad={bad} neutral={neutral} />
+      <h1>Anecdote of the day</h1>
+      {anecdotes[selected]}
+      <br/>
+      <ButtonNastepna Zmiana={Zmiana}></ButtonNastepna>
+      <ButtonVote Vote={Vote} votes={votes} selected={selected}></ButtonVote>
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[maxInd]}
+      <br/>has {maxVal} votes
     </div>
   )
 }
