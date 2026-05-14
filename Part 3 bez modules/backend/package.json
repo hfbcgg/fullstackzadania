@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "none",
+  "license": "ISC",
+  "author": "LM",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:ui": "shx rm -rf dist && cd ../frontend && npm run build && shx cp -r dist ../backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m \"build release\" && git push"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "shx": "^0.4.0"
+  }
+}
